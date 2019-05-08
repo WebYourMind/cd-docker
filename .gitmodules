@@ -1,0 +1,9 @@
+[submodule "service"]
+	path = service
+	url = git@github.com:clearlydefined/service.git
+[submodule "website"]
+	path = website
+	url = git@github.com:clearlydefined/website.git
+[submodule "crawler"]
+	path = crawler
+	url = git@github.com:clearlydefined/crawler.git
