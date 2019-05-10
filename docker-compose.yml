@@ -7,48 +7,10 @@ services:
     ports: 
       - "2222:2222"
       - "4000:4000"
-    environment:
-      - AUTH_HARVEST_TEAM=harvest-dev
-      - AUTH_CURATION_TEAM=curation-dev
-      - HARVEST_STORE_PROVIDER=file
-      - FILE_STORE_LOCATION=../harvested-data
-      - CURATION_PROVIDER=github
-      - CURATION_GITHUB_TOKEN=40ce1542ef4929066504d6af0166d4be78f667b5
-      - CURATION_GITHUB_REPO=curated-data-dev
-      - CURATION_GITHUB_BRANCH=master
-      - HARVESTER_PROVIDER=crawler
-      - CRAWLER_SERVICE_URL=http://localhost:5000
-      - CRAWLER_SERVICE_AUTH_TOKEN=gobraves
-      - CURATION_MONGO_CONNECTION_STRING=mongodb://mongo:27017
-      - DEFINITION_MONGO_CONNECTION_STRING=mongodb://mongo:27017
-      - CRAWLER_WEBHOOK_TOKEN=<webhook token>
   crawler:
     build:
       context: .
       dockerfile: Dockerfile-crawler
-    environment:
-      - CRAWLER_GITHUB_TOKEN=40ce1542ef4929066504d6af0166d4be78f667b5
-      - DEFINITION_STORE_PROVIDER=mongo
-      - CRAWLER_DEADLETTER_PROVIDER=cd(file)
-      - CRAWLER_NAME=cdcrawlerlocal
-      - CRAWLER_QUEUE_PROVIDER=memory
-      - NODE_ENV=localhost
-      - CRAWLER_MODE=Standard
-      - CRAWLER_REDIS_URL=redis
-      - CRAWLER_STORE_PROVIDER=cd(file)+webhook
-      - CRAWLER_QUEUE_PREFIX=crawlerdocker
-      - CRAWLER_OPTIONS_PROVIDER=redis
-      - CRAWLER_EVENT_PROVIDER=none
-      - CRAWLER_WEBHOOK_URL=http://service:4000/webhook
-      - CRAWLER_WEBHOOK_TOKEN=<webhook token>
-      # - CRAWLER_INSIGHTS_KEY=<development environment app insights key (optional)>
-      # - CRAWLER_AZBLOB_CONNECTION_STRING=<Azure storage account connection string>      # - CRAWLER_MONGO_URL=mongodb://mongo:27017/ghcrawler
-      # - CRAWLER_HOST=<organization name>
-      # - CRAWLER_QUEUE_PROVIDER=amqp
-      # - CRAWLER_AMQP_URL=amqp://rabbitmq:5672
-      # - CRAWLER_RABBIT_MANAGER_ENDPOINT=http://guest:guest@rabbitmq:15672
-      # - CRAWLER_GITHUB_TOKENS=${CRAWLER_GITHUB_TOKENS}
-      # - CRAWLER_WEBHOOK_URL=https://api.clearlydefined.io/webhook
 
     depends_on:
       - mongo
@@ -73,9 +35,6 @@ services:
       - mongo
     ports:
       - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
   redis:
     image: redis:latest
     expose:
