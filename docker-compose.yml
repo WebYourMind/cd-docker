@@ -46,7 +46,12 @@ services:
       - .env
   redis:
     image: redis:latest
-    expose:
-      - "6379"
+    ports:
+      - "6379:6379"
     env_file: 
       - .env
+  azurite:
+    build:
+      context: ./azurite
+    ports:
+      - "10000:10000"
